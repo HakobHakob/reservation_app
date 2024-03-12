@@ -13,9 +13,10 @@ import {
   faPlane,
   faTaxi,
 } from "@fortawesome/free-solid-svg-icons"
+import { useNavigate } from "react-router-dom"
 
 export const Header = ({ type }) => {
-
+  const [destination, setDestination] = useState("")
   const [openDate, setOpendate] = useState(false)
   const [date, setDate] = useState([
     {
@@ -30,6 +31,8 @@ export const Header = ({ type }) => {
     children: 0,
     room: 1,
   })
+
+  const navigate = useNavigate()
 
   const handleoption = (name, operation) => {
     setOptions((prev) => {
@@ -48,9 +51,19 @@ export const Header = ({ type }) => {
     })
   }
 
+  const handleSearch = () => {
+    navigate("/hotels", {
+      state: {
+        destination,
+        date,
+        options,
+      },
+    })
+  }
+
   return (
-    <Styled.Header type = {type}>
-      <Styled.HeaderContainer  type = {type}>
+    <Styled.Header type={type}>
+      <Styled.HeaderContainer type={type}>
         <Styled.HeaderList>
           <Styled.HeaderListItem className="active">
             <FontAwesomeIcon icon={faBed} />
@@ -91,6 +104,7 @@ export const Header = ({ type }) => {
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </Styled.HeaderSearchItem>
               <Styled.HeaderSearchItem>
@@ -187,7 +201,9 @@ export const Header = ({ type }) => {
                 )}
               </Styled.HeaderSearchItem>
               <Styled.HeaderSearchItem>
-                <Styled.HeaderBtn>Search</Styled.HeaderBtn>
+                <Styled.HeaderBtn onClick={handleSearch}>
+                  Search
+                </Styled.HeaderBtn>
               </Styled.HeaderSearchItem>
             </Styled.HeaderSearch>
           </>
