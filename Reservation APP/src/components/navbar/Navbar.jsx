@@ -1,9 +1,5 @@
-
 import * as Styled from "./Styled"
-
-
 export const Navbar = () => {
-
   return (
     <Styled.Navbar className="navbar">
       <Styled.NavbarContainer>
