@@ -29,7 +29,7 @@ export const Slider = styled.div`
 
   .arrow {
     margin: 20px;
-    font-size: 50px;
+    font-size: 20px;
     color: lightgray;
     cursor: pointer;
   }
@@ -43,8 +43,10 @@ export const SliderWrapper = styled.div`
   align-items: center;
 
   .sliderImg {
-    width: 80%;
-    height: 80vh;
+    width: 100%;
+    height: 100vh;
+    max-width: 600px;
+    max-height: 400px;
   }
 `
 
