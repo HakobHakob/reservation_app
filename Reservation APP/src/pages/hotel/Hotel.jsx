@@ -14,9 +14,26 @@ import { photos } from "./photos"
 import { useState } from "react"
 
 export const Hotel = () => {
+  const [slideNumber, setSlideNumber] = useState(0)
+  const [open, setOpen] = useState(false)
 
-  const [slideNumber, setSlideNumber] = useState(0);
-  const [open, setOpen] = useState(false);
+  const handleOpen = (index) => {
+    setSlideNumber(index)
+    setOpen(true)
+  }
+
+  const handleMove = (direction) => {
+    let newSlideNumber
+
+    if (direction === "left") {
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+    } else {
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
+    }
+    
+    setSlideNumber(newSlideNumber)
+    console.log("newSlideNumber", newSlideNumber)
+  }
   return (
     <>
       <Navbar />
@@ -32,7 +49,7 @@ export const Hotel = () => {
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="arrow"
-              onClick={() => handleMove("l")}
+              onClick={() => handleMove("left")}
             />
             <Styled.SliderWrapper>
               <img src={photos[slideNumber].src} alt="" className="sliderImg" />
@@ -40,10 +57,11 @@ export const Hotel = () => {
             <FontAwesomeIcon
               icon={faCircleArrowRight}
               className="arrow"
-              onClick={() => handleMove("r")}
+              onClick={() => handleMove("right")}
             />
           </Styled.Slider>
         )}
+
         <Styled.HotelWrapper>
           <Styled.BookNowBtn>Reserve or Book Now!</Styled.BookNowBtn>
           <Styled.HotelTitle>Tower Street Apartments</Styled.HotelTitle>
