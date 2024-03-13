@@ -11,10 +11,17 @@ import { SearchItem } from "../../components/searchItem/SearchItem"
 
 export const List = () => {
   const location = useLocation()
-  const [destination, setDestination] = useState(location.state.destination)
-  const [date, setDate] = useState(location.state.date)
+
+  // Initialize state variables with default values
+  const defaultDestination = location.state?.destination || "Madrid"
+  const defaultDate = location.state?.date || [{ startDate: new Date(), endDate: new Date() }]
+  const defaultOptions = location.state?.options || null
+
+  // Set up state variables
+  const [destination, setDestination] = useState(defaultDestination)
+  const [date, setDate] = useState(defaultDate)
   const [openDate, setOpenDate] = useState(false)
-  const [options, setOptions] = useState(location.state.options)
+  const [options, setOptions] = useState(defaultOptions)
 
   return (
     <Styled.List>
@@ -77,7 +84,7 @@ export const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.adult}
+                    placeholder={options.adult || 1}
                   />
                 </Styled.ListOptionItem>
 
@@ -87,7 +94,7 @@ export const List = () => {
                     type="number"
                     min={0}
                     className="lsOptionInput"
-                    placeholder={options.children}
+                    placeholder={options.children || 0}
                   />
                 </Styled.ListOptionItem>
 
@@ -97,7 +104,7 @@ export const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.room}
+                    placeholder={options.room || 1}
                   />
                 </Styled.ListOptionItem>
               </Styled.ListOptions>
